@@ -3,6 +3,7 @@ package main
 import (
 	"Golang-RestAPI/app"
 	"Golang-RestAPI/controller"
+	"Golang-RestAPI/exception"
 	"Golang-RestAPI/helper"
 	"Golang-RestAPI/repository"
 	"Golang-RestAPI/service"
@@ -29,12 +30,14 @@ func main() {
 	router.PUT("/api/categories/:categoryId", categoryController.Update)
 	router.DELETE("/api/categories/:categoryId", categoryController.Delete)
 
+	router.PanicHandler = exception.ErrorHandler
+
 	server := http.Server{
 		Addr:    "localhost:3000",
 		Handler: router,
 	}
-
+	fmt.Println("Application is running...")
 	err := server.ListenAndServe()
 	helper.Panic(err)
-	fmt.Println("Application is running...")
+
 }

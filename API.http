@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ### Get category by Id
-GET http://localhost:3000/api/categories/5
+GET http://localhost:3000/api/categories/3
 Accept: application/json
 
 ### Update category by id
@@ -25,5 +25,5 @@ Content-Type: application/json
 }
 
 ### Delete category by Id
-DELETE http://localhost:3000/api/categories/6
+DELETE http://localhost:3000/api/categories/900
 Accept: application/json

@@ -5,6 +5,7 @@ import (
 	"Golang-RestAPI/controller"
 	"Golang-RestAPI/exception"
 	"Golang-RestAPI/helper"
+	"Golang-RestAPI/middleware"
 	"Golang-RestAPI/repository"
 	"Golang-RestAPI/service"
 	"fmt"
@@ -34,7 +35,7 @@ func main() {
 
 	server := http.Server{
 		Addr:    "localhost:3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 	fmt.Println("Application is running...")
 	err := server.ListenAndServe()

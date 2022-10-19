@@ -4,9 +4,11 @@ import (
 	"Golang-RestAPI/helper"
 	"Golang-RestAPI/model/web"
 	"Golang-RestAPI/service"
+	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 type CategoryControllerImpl struct {
@@ -79,6 +81,7 @@ func (controller *CategoryControllerImpl) FindById(writer http.ResponseWriter, r
 }
 
 func (controller *CategoryControllerImpl) FindAll(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	now := time.Now()
 	categoryResponses := controller.CategoryService.FindAll(request.Context())
 	webResponse := web.WebResponse{
 		Code:   200,
@@ -86,4 +89,6 @@ func (controller *CategoryControllerImpl) FindAll(writer http.ResponseWriter, re
 		Data:   categoryResponses,
 	}
 	helper.WriteToResponseBody(writer, webResponse)
+	result := time.Since(now)
+	fmt.Println(result)
 }
